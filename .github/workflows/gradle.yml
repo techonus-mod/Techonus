@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master  # Replace with the branch you want to trigger the workflow on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: 1.8
+
+      - name: Build mod
+        run: ./gradlew build  # Replace with the appropriate build command for your mod
+
+      - name: Upload artifacts
+        run: |
+          mkdir artifacts
+          cp build/libs/*.jar artifacts/
+        # Upload the artifacts to a desired location, e.g., a release or an artifact storage
