@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 1.8
-          distribution: "liberica"
+        distribution: "liberica"
       - name: Build mod
-        run: ./gradlew build  # Replace with the appropriate build command for your mod
+        run: .../gradlew build  # Replace with the appropriate build command for your mod
 
       - name: Upload artifacts
         run: |
