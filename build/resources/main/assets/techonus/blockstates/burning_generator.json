@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "normal":
+    {
+      "model": "techonus:burning_generator"
+    }
+  }
+}

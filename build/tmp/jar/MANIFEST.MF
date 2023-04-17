@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Implementation-Title: techonus
+Implementation-Version: 1.0-SNAPSHOT
+Specification-Title: techonus
+Implementation-Timestamp: 2023-04-16T18:38:14-0500
+Specification-Version: 1
+

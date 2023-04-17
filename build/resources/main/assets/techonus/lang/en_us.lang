@@ -1,0 +1,8 @@
+item.test_item.name=test item
+
+itemGroup.maintab=Techonus
+itemGroup.itemtab=Techonus Items
+itemGroup.oretab=Techonus Ores
+
+container.generator=Generator
+container.energy_storage=Energy Storage
