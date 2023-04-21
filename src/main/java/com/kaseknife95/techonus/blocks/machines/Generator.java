@@ -6,9 +6,6 @@ import com.kaseknife95.techonus.blocks.BlockBase;
 import com.kaseknife95.techonus.blocks.tileentities.TileEntityGenerator;
 import com.kaseknife95.techonus.util.Reference;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,10 +19,9 @@ import javax.annotation.Nullable;
 
 public class Generator extends BlockBase {
 
-    public static final PropertyDirection FACING = PropertyDirection.create("facing");
+
     public Generator(String name) {
         super(name, Material.IRON, Techonus.tab);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 
     }
 
@@ -56,18 +52,5 @@ public class Generator extends BlockBase {
         super.breakBlock(worldIn, pos, state);
     }
 
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
-    }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
 }

@@ -4,7 +4,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.IEnergyStorage;
-import javax.annotation.Nullable;
 
 public class CustomEnergyStorage implements IEnergyStorage {
 
@@ -51,11 +50,25 @@ public class CustomEnergyStorage implements IEnergyStorage {
             return 0;
         }
 
-        int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
+        int energyExtracted = Math.min(energy, this.maxExtract);
         if (!simulate) {
             energy -= energyExtracted;
         }
         return energyExtracted;
+    }
+
+    public int setEnergy(int i, boolean simulate){
+        if(!simulate){
+            energy = i;
+        }
+        return i;
+    }
+
+    public int addEnergy(int i, boolean simulate) {
+        if(!simulate){
+            energy += i;
+        }
+     return i;
     }
 
     @Override
@@ -101,4 +114,6 @@ public class CustomEnergyStorage implements IEnergyStorage {
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
         return true;
     }
+
+
 }

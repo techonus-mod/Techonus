@@ -6,12 +6,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 
 public class TileEntityEnergyStorage extends TileEntity implements ITickable {
     private CustomEnergyStorage storage = new CustomEnergyStorage(200000);
@@ -21,19 +19,7 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
     @Override
     public void update()
     {
-        for (EnumFacing facing : EnumFacing.VALUES) {
-            BlockPos neighborPos = pos.offset(facing);
-            TileEntity neighborTileEntity = world.getTileEntity(neighborPos);
-            if (neighborTileEntity != null && neighborTileEntity.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
-                CustomEnergyStorage energyStorage = (CustomEnergyStorage) neighborTileEntity.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
-                if (energyStorage != null && energyStorage.canExtract()) {
-                    int energyExtracted = energyStorage.extractEnergy(getMaxEnergyStored() - getEnergyStored(), false);
-                    energy += energyExtracted;
-                    markDirty();
-                }
-            }
-        }
-        if(world.isBlockPowered(pos)) energy += 100;
+
     }
 
     @Override
@@ -54,7 +40,7 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
-        compound.setInteger("GuiEnergy", this.energy);
+        compound.setInteger("GuiEnergy", this.storage.getEnergyStored());
         compound.setString("Name", this.getDisplayName().toString());
         this.storage.writeToNBT(compound);
         return compound;
@@ -64,7 +50,7 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        this.energy = compound.getInteger("GuiEnergy");
+        this.storage.setEnergy(compound.getInteger("GuiEnergy"), false) ;
         this.customName = compound.getString("Name");
         this.storage.readFromNBT(compound);
     }
@@ -77,7 +63,7 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
 
     public int getEnergyStored()
     {
-        return energy;
+        return this.storage.getEnergyStored();
     }
 
     public int getMaxEnergyStored()
@@ -90,15 +76,13 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
         switch(id)
         {
             case 0:
-                return this.energy;
+                return this.storage.getEnergyStored();
             default:
                 return 0;
         }
     }
 
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        return storage.receiveEnergy(maxReceive, simulate);
-    }
+    public int receiveEnergy(int maxReceive, boolean simulate) { return storage.receiveEnergy(maxReceive, simulate); }
 
 
     public int extractEnergy(int maxExtract, boolean simulate) {
@@ -110,7 +94,7 @@ public class TileEntityEnergyStorage extends TileEntity implements ITickable {
         switch(id)
         {
             case 0:
-                this.energy = value;
+                this.storage.setEnergy(value, false);
         }
     }
 

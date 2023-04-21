@@ -10,18 +10,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-
 public class ContainerGenerator extends Container
 {
     private final TileEntityGenerator tileentity;
-    private int energy, cookTime;
+    private int energy, furnaceBurnTime, currentItemBurnTime, currentTFperTick;
+
 
     public ContainerGenerator(InventoryPlayer player, TileEntityGenerator tileentity)
     {
         this.tileentity = tileentity;
         IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        this.addSlotToContainer(new SlotItemHandler(handler, 0, 80, 33));
+        this.addSlotToContainer(new SlotItemHandler(handler, 0, 56, 53));
 
         for(int y = 0; y < 3; y++)
         {
@@ -58,11 +58,15 @@ public class ContainerGenerator extends Container
         {
             IContainerListener listener = (IContainerListener)this.listeners.get(i);
             if(this.energy != this.tileentity.getField(0)) listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
-            if(this.cookTime != this.tileentity.getField(1)) listener.sendWindowProperty(this, 1, this.tileentity.getField(1));
+            if(this.furnaceBurnTime != this.tileentity.getField(1)) listener.sendWindowProperty(this, 1, this.tileentity.getField(1));
+            if (this.currentItemBurnTime != this.tileentity.getField(2)) listener.sendWindowProperty(this, 1, this.tileentity.getField(2));
+            if (this.currentTFperTick != this.tileentity.getField(3)) listener.sendWindowProperty(this, 1, this.tileentity.getField(3));
         }
 
         this.energy = this.tileentity.getField(0);
-        this.cookTime = this.tileentity.getField(1);
+        this.furnaceBurnTime = this.tileentity.getField(1);
+        this.currentItemBurnTime = this.tileentity.getField(2);
+        this.currentTFperTick = this.tileentity.getField(3);
     }
 
     @Override
