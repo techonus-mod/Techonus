@@ -9,4 +9,6 @@ public class Reference {
 
     public static final int GUI_GENERATOR = 1;
     public static final int GUI_ENERGY_STORAGE = 2;
+    public static final int GUI_PULVERIZER = 3;
+
 }
