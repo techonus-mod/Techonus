@@ -2,11 +2,9 @@
   "parent": "block/orientable",
   "textures": {
     "particle": "techonus:blocks/burning_generator_side",
-    "up": "techonus:blocks/burning_generator_side",
-    "down": "techonus:blocks/burning_generator_side",
-    "north": "techonus:blocks/burning_generator_side",
-    "east": "techonus:blocks/burning_generator_side",
-    "south": "techonus:blocks/burning_generator_side",
-    "west": "techonus:blocks/burning_generator_side"
+    "top": "techonus:blocks/burning_generator_top",
+    "bottom": "techonus:blocks/burning_generator_bottom",
+    "side": "techonus:blocks/burning_generator_side",
+    "front": "techonus:blocks/burning_generator_front"
   }
 }

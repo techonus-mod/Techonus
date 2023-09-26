@@ -6,3 +6,6 @@ itemGroup.oretab=Techonus Ores
 
 container.generator=Generator
 container.energy_storage=Energy Storage
+
+tile.energy_storage.name=Energy Storage
+tile.burning_generator.name=Burning Generator

@@ -47,6 +47,7 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
             }
         }
 
+
         for (EnumFacing facing : EnumFacing.VALUES) {
 
                 TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
@@ -298,6 +299,8 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
          super.writeToNBT(compound);
          compound.setTag("Inventory", this.handler.serializeNBT());
          compound.setInteger("furnaceBurnTime", this.furnaceBurnTime);
+         compound.setInteger("currentItemBurnTime", this.currentItemBurnTime);
+        compound.setInteger("currentItemEnergyValue", this.currentItemEnergyValue);
          compound.setInteger("GuiEnergy", this.energy);
          compound.setString("Name", getDisplayName().toString());
          this.storage.writeToNBT(compound);
@@ -309,6 +312,8 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         super.readFromNBT(compound);
         this.handler.deserializeNBT(compound.getCompoundTag("Inventory"));
         this.furnaceBurnTime = compound.getInteger("furnaceBurnTime");
+        this.currentItemBurnTime = compound.getInteger("currentItemBurnTime");
+        this.currentItemEnergyValue = compound.getInteger("currentItemEnergyValue");
         this.energy = compound.getInteger("GuiEnergy");
         String custonName = compound.getString("Name");
         this.storage.readFromNBT(compound);

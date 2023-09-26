@@ -14,4 +14,6 @@ public class ClientProxy extends CommonProxy{
     public void registerStateMapper(){
         RenderHandler.registerCustomStateMapper();
     }
+
+
 }

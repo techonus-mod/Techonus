@@ -2,7 +2,6 @@ package com.kaseknife95.techonus.blocks.machines;
 
 import com.kaseknife95.techonus.Techonus;
 import com.kaseknife95.techonus.blocks.BlockBase;
-
 import com.kaseknife95.techonus.blocks.tileentities.TileEntityEnergyCable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
